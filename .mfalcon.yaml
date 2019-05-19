@@ -1,0 +1,6 @@
+private_key: joker
+#node:
+#- nodename: m
+#  IP: 0.0.0.0
+#  username: root
+#  dir: ~
