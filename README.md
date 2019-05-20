@@ -20,5 +20,5 @@ node:
   dir-node2
 ```
 # issue
-- [ ] private key must exit in /usr/local/bin
+- [ ] private key must exit in dir where cmd is executing
 - [ ] can not config by flag  
