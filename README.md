@@ -19,3 +19,6 @@ node:
   username-node2
   dir-node2
 ```
+# issue
+- [ ] private key must exit in /usr/local/bin
+- [ ] can not config by flag  
