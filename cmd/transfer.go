@@ -15,7 +15,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"log"
@@ -44,7 +43,7 @@ var transferCmd = &cobra.Command{
 			para = append(para, v)
 		}
 		para = append(para, username+"@"+ip+":"+dir)
-		fmt.Println(para)
+		//fmt.Println(para)
 		c := exec.Command("scp", para...)
 		if err := c.Run(); err != nil {
 			log.Println(err)
