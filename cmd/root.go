@@ -41,10 +41,10 @@ to quickly create a Cobra application.`,
 }
 
 type Node struct {
-	nodename string
-	ip       string
-	username string
-	dir      string
+	Nodename string
+	IP       string
+	Username string
+	Dir      string
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -98,10 +98,22 @@ func initConfig() {
 
 func setDefaultENV() {
 	m := make(map[int]interface{})
-	m[0] = interface{}(Node{nodename: "m",
-		ip:       "0.0.0.0",
-		username: "root",
-		dir:      "~"})
+	//m[0] = interface{}(Node{Nodename: "m",
+	//	IP:       "0.0.0.0",
+	//	Username: "root",
+	//	Dir:      "~"})
+	m[0] = Node{Nodename: "m",
+		IP:       "192.168.1.28",
+		Username: "root",
+		Dir:      "~"}
+	m[1] = Node{Nodename: "w1",
+		IP:       "192.168.1.29",
+		Username: "root",
+		Dir:      "~"}
+	m[2] = Node{Nodename: "w2",
+		IP:       "192.168.1.30",
+		Username: "root",
+		Dir:      "~"}
 	viper.SetDefault("private_key", "./maoka_cluster.pem")
 	viper.SetDefault("node", m)
 }

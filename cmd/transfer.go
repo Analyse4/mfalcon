@@ -16,22 +16,39 @@ package cmd
 
 import (
 	"fmt"
-
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"log"
+	"os/exec"
 )
 
 // transferCmd represents the transfer command
 var transferCmd = &cobra.Command{
-	Use:   "transfer",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Use:   "transfer [file] [dst]",
+	Short: "Transfer any files to any node",
+	Long:  `transfer simplify command scp and it transfer any files to any node`,
+	Args:  cobra.MinimumNArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("transfer called")
+		pkPath := viper.GetString("private_key")
+		var ip, username, dir string
+		para := make([]string, 0)
+		para = append(para, "-i", pkPath)
+		for _, v := range viper.Get("node").(map[int]interface{}) {
+			if v.(Node).Nodename == args[len(args)-1] {
+				ip = v.(Node).IP
+				username = v.(Node).Username
+				dir = v.(Node).Dir
+			}
+		}
+		for _, v := range args[:len(args)-1] {
+			para = append(para, v)
+		}
+		para = append(para, username+"@"+ip+":"+dir)
+		fmt.Println(para)
+		c := exec.Command("scp", para...)
+		if err := c.Run(); err != nil {
+			log.Println(err)
+		}
 	},
 }
 

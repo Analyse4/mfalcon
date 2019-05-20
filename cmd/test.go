@@ -32,7 +32,9 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(viper.Get("node"))
+		t := viper.Get("node").(map[int]interface{})[0]
+		n := t.(Node)
+		fmt.Println(n.IP)
 	},
 }
 
